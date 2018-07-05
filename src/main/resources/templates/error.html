@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title>Error page</title>
+      <meta charset="utf-8" />
+        
+	  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+	  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap-datetimepicker.min.css}" media="screen"/>
+	  <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+	  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+        <style>
+       		body, html {font-family: Lucida Grande, Helvetica , Geneva, Verdana, Arial, Helvetica, sans-serif;
+				 color: white; background-color: #333; height: 100%;}
+			table td{vertical-align:top; border:solid 1px #888;	padding:10px;}
+			.btn-home {font-size: 14px; padding: 5px 40px; border-radius: 8px; background-color: grey; color: black;
+    			border: 2px solid #555555; webkit-transition-duration: 0.2s; /* Safari */ transition-duration: 0.2s; width: 40%;
+    			float: left; margin-left:25px; margin-right:25px; }
+    		.btn-home:hover {background-color: #99b3ff; color: white;}
+			.btn-error {font-size: 14px; padding: 5px 40px; border-radius: 8px; background-color: grey; color: black;
+    			border: 2px solid #555555; webkit-transition-duration: 0.2s; /* Safari */ transition-duration: 0.2s; width: 40%;
+    			float: left; margin-left:25px; margin-right:25px; }
+    		.btn-error:hover {background-color: #ff751a; color: white;}
+    		.box-error {position:absolute; top:25%; left:20px;}
+		</style>
+    </head>
+<body>
+<br /><br />
+<h4 th:text="#{email.error}" style="display: block; text-align: center;">Oops, sth went wrong, try again</h4>
+<!-- 
+<br /><br />
+
+		<div style="display: block;">
+			<form action="#" th:action="@{/clearBuffers}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{resultList}" />
+			  <button class="btn btn-sm" id="inout-btn"  style="width: 86%; margin-left:4%; margin-right:7%;"
+			  type="submit" th:text="#{clear.buffers}">- Clear buffers- </button>
+		    </form>
+			<br />
+		</div>
+ -->
+<br /><br />
+<a href="index.html" th:href="@{/index.html}"><button class="btn btn-home" th:text="#{back.to.home}">Back to Home Page</button></a>
+<button  class="btn btn-error" data-toggle="collapse" data-target="#error" th:text="#{error.show}">Show error details</button>
+
+<div id="error" class="collapse">
+<div class="box-error">
+<h1 style="display: block;"> Error stack trace</h1>
+	<table style="display: block;">
+	    <tr>
+	        <td>Date</td>
+	        <td th:text="${timestamp}"/>
+	    </tr>
+	    <tr>
+	        <td>Path</td>
+	        <td th:text="${path}"/>
+	    </tr>
+	    <tr>
+	        <td>Error</td>
+	        <td th:text="${error}"/>
+	    </tr>
+	    <tr>
+	        <td>Status</td>
+	        <td th:text="${status}"/>
+	    </tr>
+	    <tr>
+	        <td>Message</td>
+	        <td th:text="${message}"/>
+	    </tr>
+	    <tr>
+	        <td>Exception</td>
+	        <td th:text="${exception}"/>
+	    </tr>
+	    <tr>
+	        <td>Trace</td>
+	        <td>
+	            <pre th:text="${trace}"></pre>
+	        </td>
+	    </tr>
+	</table>
+</div>
+</div>      
+
+    </body>
+</html>

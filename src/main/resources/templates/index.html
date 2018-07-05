@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+	<script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+	
+	<script type="text/javascript" th:src="@{cookies/cookiebar-latest.min.js}"></script>
+	
+	<title th:text="#{app.title}">Contacts </title>
+	   
+</head>
+<body>
+
+<div class="bgimg">
+	
+	<div class="lang"> 
+		<a th:href="@{/index?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
+	</div>	
+		
+        <h1 id="title" th:text="#{app.title}">Contact List</h1>
+                       
+        <a th:href="@{/login}"><button class="login" th:text="#{login}">LogIn</button></a>
+        <a th:href="@{/register}"><button class="signup"  th:text="#{signup}">Sign Up</button></a>
+        
+        <div id="demologin">
+        	 <p th:text="#{notwanttologin}">Want to try it out without setting up an account?</p>
+       		<form action="#" th:action="@{/login}" method="post">
+			    <input type="hidden"  name="username" value="demo@demo.com"/>
+			    <input type="hidden" name="password" value="111111"/>
+			    <a th:href="@{/contacts}">
+			    	<button id="demouser" type="submit" th:text="#{demouser}">Login</button>
+			    </a>
+		    </form>
+        </div>
+       
+</div>
+
+
+	 
+	  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

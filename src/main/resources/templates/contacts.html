@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ 
+  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap-datetimepicker.min.css}" media="screen"/>
+  <link rel="stylesheet" type="text/css" th:href="@{css/contacts.css}"/>
+  <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+  
+ 
+</head>
+<body>
+<div>
+	<ul class="topnav">
+			<li><a id="title" href="/contacts" th:text="#{app.title}">Contacts</a></li>
+			<li><span id="topinfo-first" th:text="#{today.is}">Today is </span></li>
+			<li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentZonedDateTime)}">Thursday</span></li>
+			<li><span id="lastloggeddate" th:text="${#temporals.format(currentZonedDateTime, 'dd.MM.yyyy')}">25.05.2018</span></li>
+			<li><span id="lastloggeddate" th:text="${#temporals.format(currentZonedDateTime, 'HH:mm')}">Thursday</span></li>
+			<li><span id="topinfo-zone" th:text="#{zone}">Zone</span></li>
+			<li><span id="lastloggeddate" th:text="${currentZone}">London</span></li>
+			<li class="right">
+			    <form action="logout" th:action="@{/logout}" method="post" >
+			        <input type="submit" id="logmeout" th:value="#{logmeout}" />
+			    </form>
+			</li>						
+			<li class="right"><a id="flags" href="/contacts?lang=ru"><img src="/images/flag_ru128px.png" class="langimg"></img></a></li>
+			<li class="right"><a id="flags" href="/contacts?lang=es"><img src="/images/flag_es128px.png" class="langimg"></img></a></li>
+			<li class="right"><a id="flags" href="/contacts?lang=pl"><img src="/images/flag_pl128px.png" class="langimg"></img></a></li>
+			<li class="right"><a id="flags" href="/contacts?lang=en"><img src="/images/flag_uk128px.png" class="langimg"></img></a></li>
+	</ul>
+</div>
+<div>
+	<ul class="topinfo">
+			<li><span id="loggedinastext" th:text="#{loggedinas}">You are logged in as: </span></li>
+			<li><span id="loggedinasemail" th:text="${currentUser.email}">demo@demo.com</span></li>
+			<li><span id="loggedinastext" th:text="#{privileges}">privileges</span></li>
+			<li>
+			<div sec:authorize="hasRole('ROLE_USER')">
+				<span id="loggedinasemail" th:text="#{role.user}">-user-</span>
+			</div>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<span id="loggedinasemail" th:text="#{role.admin}">-admin-</span>
+			</div>
+			</li>
+			<li><span id="lastloggedtext" th:text="#{account.created}">account created</span></li>
+			<li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentUser.registered)}">Thursday</span></li>
+			<li><span id="lastloggeddate" th:text="${#temporals.format(currentUser.registered, 'dd.MM.yyyy')}">25.05.2018</span></li>		
+			<li class="right"><span id="lastloggeddate" th:text="${contactsTotalByUser}">35</span></li>
+			<li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.total}">total</span></li>
+			<li class="right"><span id="lastloggeddate" th:if="${contactWrapper.resultList.size() != 0}" th:text="${contactWrapper.resultList.size()}">5</span></li>
+			<li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.loaded}">loaded</span></li>
+	</ul>
+</div>
+<div class="box-contacts">
+<div class="container" id="container-left">
+  <ul class="nav nav-tabs" id="tabs-head">
+    <li class="active"><a id="tab-link" data-toggle="tab" href="#contacts" th:text="#{contacts}">Contacts</a></li>
+    <li><a id="tab-link" data-toggle="tab" href="#add" th:text="#{add.contact}">Add Contact</a></li>
+     <li><a id="tab-link" data-toggle="tab" href="#io" th:text="#{backup.restore}">Backup/Restore</a></li>
+    <li><a id="tab-link" th:href="@{/updateDetails}" th:text="#{edit.details}">Edit Details</a></li>
+    <li><a id="tab-link" data-toggle="tab" href="#admin" th:text="#{admin.panel}">Admin Panel</a></li>
+  </ul>
+<div class="container-list">	
+  <div class="tab-content" >
+    <div id="contacts" class="tab-pane fade in active">
+       <div class="panel-group" id="accordion">
+
+  <div th:if="${contactWrapper.resultList.size() != 0}" >   
+  
+  		<div style="display: block;">
+			<form action="#" th:action="@{/clearSelectedContacts}" method="post" th:object="${fromView}">
+  	          <input type="hidden" th:field="*{contactList}" />
+			  <button class="btn btn-sm" id="inout-btn"  style="width: 86%; margin-left:4%; margin-right:7%;"
+			  type="submit" th:text="#{contact.selected.clear}">- Clear selection- </button>
+		    </form>
+			<br />
+		</div>
+  
+       <div th:each="contact,iterStat : ${contactWrapper.resultList}">
+          <div class="panel panel-default" id="accord">
+	         <div class="panel-heading" id="accord-head">
+	            <h4 class="panel-title">
+	              <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse' + ${iterStat.index}">
+		              <span id="name" th:text="${contact.firstName + ' ' + contact.lastName}">First Name Last Name</span>
+		              <span id="detail" th:text="${contact.phone}">phone: 07845 879 524</span>
+		              <span id="detail" th:text="${contact.email}">email: john.doe@btinternet.com</span>
+		              
+		              <span id="dates" th:if="${contact.created != null}"
+		              th:text="#{created.on} + ${#temporals.format(contact.created, 'dd.MM.yyyy  HH:mm')}"></span>
+		              <span id="dates"  th:if="${contact.updated != null}"
+		              th:text="#{updated.on} + ${#temporals.format(contact.updated, 'dd.MM.yyyy HH:mm')}"></span>            
+		          </a>
+	            </h4>
+	          </div>
+          
+          <div th:id="'collapse' + ${iterStat.index}" class="panel-collapse collapse" style="transition: height 0.1s;">
+            <div class="panel-body" id="accord-body">
+            	<div class="table-responsive">
+                <table class="table table-condensed" id="table-contact" >
+                  <thead id="table-head">
+                    <tr>
+                      <td th:text="#{contact.firstName}">Firstname</td>
+                      <td th:text="#{contact.lastName}">Lastname</td>
+                      <td th:text="#{contact.phone}">Phone</td>
+                      <td th:text="#{contact.email}">Email</td>
+                      <td th:text="#{contact.street}">Street</td>
+                      <td th:text="#{contact.postcode}">Postcode</td>
+                      <td th:text="#{contact.city}">City</td>
+                      <td th:text="#{contact.country}">Country</td>                      
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody id="table-body">
+                    <tr>
+                      <td id="table-data" th:text="${contact.firstName}">John</td>
+                      <td id="table-data" th:text="${contact.lastName}">Doe</td>
+                      <td id="table-data" th:text="${contact.phone}">07434 454 341</td>
+                      <td id="table-data" th:text="${contact.email}">john@example.com</td>
+                      <td id="table-data" th:text="${contact.street}">Long Acre</td>
+                      <td id="table-data" th:text="${contact.postcode}">WC2E 9LP)</td>
+                      <td id="table-data" th:text="${contact.city}">London</td>
+                      <td id="table-data" th:text="${contact.country}">United Kingdom</td>
+                    </tr>
+                    <!--  <td id="table-data" th:text="${contact.description}">user demo</td> --> 
+                    
+                   <!--  Modal that doesn't really work 
+                      <td>
+	                      <button type="button" class="btn btn-sm"  id="modal-btn" data-toggle="modal" data-target="#descModal" th:text="#{contact.show}">Open Modal</button>
+		                      <div class="modal" id="descModal" role="dialog">
+							    <div class="modal-dialog">
+							    
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title" id="modal-header" th:text="#{contact.description}">Description</h4>
+							        </div>
+							        <div class="modal-body">
+							          <p  id="modal-text" th:text="${contact.description}">contact description</p>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-sm" id="modal-btn" data-dismiss="modal">Close</button>
+							        </div>
+							      </div>
+							     </div>	
+							  </div>
+                      </td> 
+                    -->        
+                     
+                    
+                    <tr>
+                   	 <td style="color:lightgrey;" th:text="#{contact.description}">Description: </td>
+                   	 <td colspan="5" id="table-wrap" th:text="${contact.description}">Some description</td>
+                      <td>
+	                      <form action="#" th:action="@{/editContact}" method="post" role="form" th:object="${contact}">
+			                  <input type="hidden" th:value="*{id}" name="id"/>
+			                  <button class="btn btn-sm" id="edit-btn" type="submit" th:text="#{contact.edit}">- Edit- </button>
+						  </form>
+					  </td>
+                      <td>
+	                      <form action="#" th:action="@{/deleteContact}" th:method="post" role="form" th:object="${contact}">
+			                  <input type="hidden" name="id" th:value="*{id}"/>
+			                  <button class="btn btn-sm" id="delete-btn" type="submit" th:text="#{contact.delete}">- Delete- </button>
+						  </form>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td colspan="8">
+                      
+                      <div class="container">
+						  <a th:href="'#gmap' + ${contact.id}" class="btn btn-default btn-xs" id="btn-gmap" data-toggle="collapse" th:text="#{show.on.googlemaps}">show on google maps</a>
+						  <div th:id="'gmap' + ${contact.id}" class="collapse">
+						  	<div>
+							   <iframe width="100%" height="350" 
+	                      		th:src="@{'https://maps.google.com/maps?q=' + ${contact.street} + '+' + ${contact.city}
+	                      		 + '+' + ${contact.postcode} + '+' + ${contact.country} + '&amp;output=embed'}">
+	                   		   </iframe>
+	                   		</div>
+						  </div>
+						</div>
+                      	
+                      </td>
+                   </tr>
+                      
+                  </tbody>
+                </table>
+            </div>
+          </div>  
+          </div>
+          
+        </div>
+     </div>
+  </div>
+  		
+    </div>   
+    
+    <div th:if="${contactWrapper.resultList.size() == 0}" >
+				<br /><br /><br /><br />
+				<h3 style="text-align: center;" id="info" th:text="#{no.contacts.loaded}">You haven't loaded any contacts yet.</h3>
+				<h5 style="text-align: center;" id="info" th:text="#{no.contacts.loaded2}">You haven't loaded any contacts yet.</h5>
+				
+			<div id="1"> <!-- First search group on the right side, switch case: "1" -->
+				<form action="#" th:action="@{/contacts}" th:object="${fromView}" th:method="post">
+					<input type="hidden" name="selector" value="1"/>
+					<input type="hidden" value="0" th:field="*{result1}" />	
+					<input type="hidden" value="firstName" th:field="*{sortBy}" />
+					<input type="hidden" value="1" th:field="*{direction}" />
+					<button type="submit" class="btn btn-lg btn-block" id="load-btn-center" th:text="#{load.all}">Load</button>
+				</form>
+			</div>
+				
+		</div>
+           
+       
+  </div>
+    
+   <div id="add" class="tab-pane fade">
+          
+     <form action="#" th:action="@{/addContact}" method="post" th:object="${contact}">
+     	      			
+		<p class="in-block" th:text="#{first.name.add}">First Name</p>
+		<input class="input-block" type="text" th:field="*{firstName}"></input>
+		<p class="error-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name errors</p><br/>
+		
+		<p class="in-block" th:text="#{last.name.add}">Last Name</p>
+		<input class="input-block" type="text" th:field="*{lastName}"></input>
+		<p class="error-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First name errors</p><br/>
+		
+		<p class="in-block" th:text="#{contact.phone}">Phone:</p>
+		<input class="input-block" type="text" th:field="*{phone}"></input><br/>
+		
+		<p class="in-block" th:text="#{contact.email}">Email:</p>
+		<input class="input-block" type="text" th:field="*{email}"></input>
+		<p class="error-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First name errors</p><br/>
+				
+		<p class="in-block" th:text="#{contact.street}">Street</p>
+		<input class="input-block" type="text" th:field="*{street}"></input><br/>
+		
+		<p class="in-block" th:text="#{contact.postcode}">Postcode</p>
+		<input class="input-block" type="text" th:field="*{postcode}"></input><br/>
+		
+		<p class="in-block" th:text="#{contact.city}">City</p>
+		<input type="text" class="input-block" th:field="*{city}"></input><br/>
+		
+		<p class="in-block" th:text="#{contact.country}">Country</p>
+		<input class="input-block" type="text" th:field="*{country}"></input><br/>
+		
+		<!-- <label class="in-block" for="date" th:text="#{date}">Phone:</label>
+		<input class="input-block" type="text" th:field="*{date}"></input><br/> -->
+		
+		<p class="in-block" th:text="#{contact.description}">Description:</p>
+		<textarea  id="input-block" style="height: 150px; width: 400px; background-color: rgb(255, 255, 255, 0.6);" th:field="*{description}"></textarea>
+		
+		<button class="btn btn-default btn-block" id="add-btn" type="submit" th:text="#{contact.add}">- Add contact -</button>
+	</form>
+  </div>
+  
+<div id="io" class="tab-pane fade in">
+       
+<div class="box-inout">
+	
+		<br />	
+		<div style="display: block;">
+			<form action="#" th:action="@{/clearSelectedContacts}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{resultList}" />
+			  <button class="btn btn-sm" id="inout-btn"  style="width: 86%; margin-left:4%; margin-right:7%;"
+			  type="submit" th:text="#{contact.selected.clear}">- Clear selection- </button>
+		    </form>
+			<br />
+		</div>
+		
+		<div style="display: inline-block; float: left; width:30%; margin-left:3%;">
+			<br />	
+			<form action="#" th:action="@{/downloadAllCSV}" method="post" th:object="${fromView}">
+  	          <input type="hidden" th:field="*{selector}" />
+			  <button class="btn btn-sm" id="inout-down-btn" type="submit" th:text="#{contact.download}">- Download All- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.save}">total</span>
+		    <span id="io-block"  th:text="${contactsTotalByUser}">20</span>
+			
+		 	<br /><br /><br /><br />
+			<form action="#" th:action="@{/downloadSelectedCSV}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{resultList}" />
+			  <button class="btn btn-sm" id="inout-down-btn" type="submit" th:text="#{contact.download.selected}">- Download Selected- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.save}">loaded</span>
+		    <span id="io-block" th:text="${contactWrapper.resultList.size()}">5</span>
+	     
+		     <br /><br /><br /><br />
+			 <form action="#" th:action="@{/uploadCSV}" method="post" enctype="multipart/form-data">
+		       <button class="btn btn-sm" id="inout-down-btn" type="submit" th:text="#{contact.upload}">- Upload - </button>
+		       
+			   <input type="file" name="fileUpload" style="padding: 10px 10px 10px 10px; color: white; text: center;"/>
+		     </form>  
+		     <br /><br />
+	  </div>
+		  <br />
+	
+	
+		  <div style="display: inline-block; float: left; margin-left: 30px; width:30%;">
+		  	<form action="#" th:action="@{/deleteAll}" method="post" th:object="${currentUser}">
+  	          <input type="hidden" th:field="*{email}" />
+			  <button class="btn btn-sm" id="inout-delete-btn" type="submit" th:text="#{contact.delete}">- Delete All- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.to.delete}">total</span>
+		    <span id="io-block"  th:text="${contactsTotalByUser}">20</span>
+			
+		 	<br /><br /><br /><br />
+			<form action="#" th:action="@{/deleteSelected}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{resultList}" />
+			  <button class="btn btn-sm" id="inout-delete-btn" type="submit" th:text="#{contact.delete.selected}">- Delete Selected- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.to.delete}">loaded</span>
+		    <span id="io-block" th:text="${contactWrapper.resultList.size()}">5</span>
+		  	
+		  	<br /><br /><br /><br />
+			<form action="#" th:action="@{/undoLastDelete}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{deletedList}"/>
+			  <button class="btn btn-sm" id="inout-undo-btn" type="submit" th:text="#{contact.delete.restore}">- Restore Last- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.to.restore}">loaded</span>
+		    <span id="io-block" th:text="${contactWrapper.deletedList.size()}">5</span>
+		  
+		  </div>  
+		  
+		  
+		  
+		  <div style="display: inline-block; float: left; margin-left: 20px; width:30%;">
+		  	<form action="#" th:action="@{/checkDuplicates}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{duplicatedList}" />
+			  <button class="btn btn-sm" id="inout-undo-btn" type="submit" th:text="#{check.duplicates}">- Check Duplicates- </button>
+		    </form>
+		    <span id="io-block" th:text="#{duplicates.in.database}">total</span>
+		    <span id="io-block"  th:text="${contactWrapper.duplicatedList.size()}">3</span>
+			
+		 	<br /><br /><br /><br />
+			<form action="#" th:action="@{/removeDuplicates}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{duplicatedList}" />
+			  <button class="btn btn-sm" id="inout-delete-btn" type="submit" th:text="#{remove.duplicates}">- Delete Duplicates- </button>
+		    </form>
+		    <span id="io-block" th:text="#{duplicates.to.remove}">loaded</span>
+		    <span id="io-block" th:text="${contactWrapper.duplicatedList.size()}">5</span>
+		  	
+		  	<br /><br /><br /><br />
+			<form action="#" th:action="@{/undoRemovedDuplicates}" method="post" th:object="${contactWrapper}">
+  	          <input type="hidden" th:field="*{removedList}" />
+			  <button class="btn btn-sm" id="inout-undo-btn" type="submit" th:text="#{contact.removed.restore}">- Restore Last- </button>
+		    </form>
+		    <span id="io-block" th:text="#{contacts.to.restore}">loaded</span>
+		    <span id="io-block" th:text="${contactWrapper.removedList.size()}">5</span>
+		  </div> 
+		  
+		  
+	<div style="position: relative; margin-top:40%; margin-left:3%; width:89%;">
+		<br />
+			<div th:if="${fromView.bulkOpsSwitch} == '0'">	
+				<div class="alert alert-warning" style="margin-bottom: 1px !important; height: 30px !important;font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.bulk.info}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'downloadError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.download.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'downloadOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.download.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'uploadError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.upload.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'uploadOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.upload.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'deleteError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.delete.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'deleteOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.delete.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'restoreDeletedError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.restore.deleted.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'restoreDeletedOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.restore.deleted.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'duplicatesCheckError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.duplicates.check.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'duplicatesCheckOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.duplicates.check.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'duplicatesRemoveError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.duplicates.remove.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'duplicatesRemoveOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.duplicates.remove.ok}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'restoreDuplicatesError'">	
+				<div class="alert alert-danger" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.restore.removed.failure}">info</span>
+				</div>
+			</div>
+			
+			<div th:if="${fromView.bulkOpsSwitch} == 'restoreDuplicatesOK'">	
+				<div class="alert alert-info" style="margin-bottom: 1px !important; height: 30px !important; font-size:12px !important; 
+					line-height:30px !important; padding:0px 15px !important; text-align:center; opacity: 0.8 !important;">
+				<span th:text="#{contacts.restore.removed.ok}">info</span>
+				</div>
+			</div>
+			
+			
+			
+			
+
+<!-- 	
+		class="alert alert-info"		
+		class="alert alert-success"
+		class="alert alert-warning"
+		class="alert alert-danger"
+ -->				
+	</div>
+		   
+</div>	
+   
+</div>
+  
+<div id="update" class="tab-pane fade">
+
+</div>
+  
+<div id="admin" class="tab-pane fade">
+	
+	<div sec:authorize="hasRole('ROLE_USER')">
+		<br /><br /><br /><br />
+		<h3 style="text-align: center;" id="info" th:text="#{logged.as.user}">logged.as.user</h3>
+		<h5 style="text-align: center;" id="info" th:text="#{logged.as.user2}">log in as Admin</h5>
+	</div>
+	
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+	<div >
+		<span style="color: white; padding:0px 20px; font-size: 16px; display:inline-block; float:left;"  th:text="#{welcome}"> welcome</span>
+		<div style="color: white; padding:0px 20px; font-size: 16px; display:inline-block; float:left;" sec:authentication="name"></div>
+		<span style="color: white; padding:0px 16px; font-size: 16px; display:inline-block; float:left;" th:text="#{logged.as.admin}"></span>
+	</div>
+		<br />
+		<div class="container-admin">
+		<!-- 	<div th:unless="${#lists.isEmpty(users)}">  -->		
+				 <table class="table table-striped table-condensed" style="background-color: rgb(0, 0, 0, 0.1)">
+				    <thead id="table-head-admin">
+				      <tr>
+				        <td th:text="#{user.id}">id</td>
+				        <td th:text="#{user.firstName}">First Name</td>
+				        <td th:text="#{user.lastName}">Last Name</td>
+				        <td th:text="#{user.email.username}">email/username</td>
+				        <td th:text="#{user.password}">password</td>
+				        <td th:text="#{user.enabled}">enabled</td>
+				        <td th:text="#{user.registered}">registered</td>
+				        <td th:text="#{user.contacts}">contacts</td>
+				      </tr>
+				    </thead>
+				    <tbody th:each="user : ${users}" style="background-color: rgb(0, 0, 0, 0.1)">
+				      <tr>
+				        <td id="table-user" th:text="${user.id}">1</td>
+				        <td id="table-user" th:text="${user.firstName}">Anna</td>
+				        <td id="table-user" th:text="${user.lastName}">Pitt</td>
+				        <td id="table-user" th:text="${user.email}">anna@gmail.com</td>
+				        <td id="table-user">*********</td>
+				        <td id="table-user">
+				        <span th:if="${user.enabled}" th:text="#{yes}">enabled</span>
+				        <span th:unless="${user.enabled}" th:text="#{no}"></span>
+				        </td>
+				        <td id="table-user" th:text="${#temporals.format(user.registered, 'dd.MM.yyyy')}">date registered</td>
+				        <td id="table-user" th:text="${#lists.size(user.contacts)}">124</td>
+				        
+				      </tr>
+				      <tr style="margin-bottom:5px;">
+				      	<td id="table-user">----</td>
+				      	<td id="table-user">----</td>
+				      	<td id="table-user">----</td>
+				      	<td id="table-user">----</td>
+				      	<td id="table-user">
+				      		<form action="#" th:action="@{/userPasswordReset}" method="post" role="form" th:object="${user}">
+			                  <input type="hidden" th:value="*{id}" name="id"/>
+			                  <button class="btn btn-sm" id="edit-btn" type="submit" th:text="#{reset.password}">- Edit- </button>
+							</form>
+				      	</td>
+				      	<td id="table-user">
+				      		<form action="#" th:action="@{/userEnable}" method="post" role="form" th:object="${user}">
+			                  <input type="hidden" th:value="*{id}" name="id"/>
+			                  <button class="btn btn-sm" id="edit-btn" type="submit" th:text="#{enable.disable}">- enable/disable- </button>
+						  	</form>
+				      	</td>
+				      	<td id="table-user">
+				      		<form action="#" th:action="@{/userSendConfirmation}" method="post" role="form" th:object="${user}">
+			                  <input type="hidden" th:value="*{id}" name="id"/>
+			                  <button class="btn btn-sm" id="edit-btn" type="submit" th:text="#{send.confirmation.link}">- send confirmation link- </button>
+						  	</form>
+				      	</td>
+				      	<td id="table-user">----</td>
+				      </tr>
+				      
+				    </tbody>
+				  </table>
+			    </div>	
+			 </div>
+		</div>
+	<!-- </div> -->
+
+     
+</div>
+</div> 
+</div>
+</div>
+
+<div class="box-info">
+	
+	<p id="error-small" th:errors="${fromView.result1}">action errors</p>
+	<p id="error-small" th:errors="${fromView.result2}">action errors</p>
+	<p id="error-small" th:errors="${fromView.result3}">action errors</p>
+	<p id="error-small" th:errors="${fromView.result4}">action errors</p>
+
+</div>
+<div class="box-action">
+		
+	
+	
+		<div id="4"> <!-- Fourth search group on the right side, switch case: "4" -->
+	
+	<span class="txt-center" th:text="#{search.for.date}">search for in database</span>
+	  	
+		<form action="#" th:action="@{/contacts}" th:object="${fromView}" th:method="post">
+			<input type="hidden" name="selector" value="4"/>
+				<div class="form-group">	 
+					<input class="form-control" id="input-box-left" type="text" th:field="*{searchFor4}" th:placeholder="#{search.for.like}"/>
+				</div>	
+				<div class="form-group">
+			  	  <select id="input-box-right" class="form-control" th:field="*{findBy}">
+			      <option value="0" th:text="#{select.find.in}" ></option>
+			        <option th:field="*{findBy}" value="firstName">first name</option>
+			        <option th:field="*{findBy}" value="lastName">last name</option>
+			        <option th:field="*{findBy}" value="email">email</option>
+			        <option th:field="*{findBy}" value="phone">phone</option>
+			        <option th:field="*{findBy}" value="street">street</option>
+			        <option th:field="*{findBy}" value="postcode">postcode</option>
+			        <option th:field="*{findBy}" value="city">city</option>
+			        <option th:field="*{findBy}" value="country">country</option>
+			      </select>
+			    </div>
+			 <!--   not used for now because poor browser support for datetime-local format, esp. Firefox!
+			 	<div class="form-group">
+			    	<input  class="form-control" id="input-date-left" type="datetime-local" th:field="*{dateStart}"/>
+			    	<input  class="form-control" id="input-date-right" type="datetime-local" th:field="*{dateEnd}"/>
+			    </div>
+			 --> 
+			 <!--  Bootstrap 3 datetime picker -->
+			 
+			 <span id="txt-date-from" th:text="#{from}">from</span>
+			 <div class="form-group">
+                <div style="width:250px; margin-top: 0px !important; margin-bottom: 0px !important;" 
+                class="input-group date form_datetime col-md-3 input-sm" data-date="2018-06-01T10:00:00Z" 
+                data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
+                    <input class="form-control" size="12" type="text" value="" th:field="*{dateStartTxt}" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+            </div>
+            <br />
+            <span id="txt-date-to" th:text="#{to}">to</span>
+            <div class="form-group">
+                <div style="width:250px; margin-top: 0px !important; margin-bottom: 0px !important;" 
+                class="input-group date form_datetime col-md-3 input-sm" data-date="2018-06-01T10:00:00Z" 
+                data-date-format="yyyy-mm-ddThh:ii" data-link-field="dtp_input1">
+                    <input class="form-control" size="12" type="text" value="" th:field="*{dateEndTxt}" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+            </div>			 
+			 
+		<span id="txt-left" th:text="#{limit}">limit to</span>
+		   <div class="form-group">
+			    <input class="form-control" type="number" id="dropdown-number-solo" th:field="*{result4}" />
+		</div>
+		<!-- 	<span id="txt-left" th:text="#{limit2}">contacts</span>	 -->
+			
+		<button type="submit" class="btn btn-sm btn-block" id="load-btn-small" th:text="#{find.btn}">Load</button>
+	</form>
+	
+	</div>	
+	
+	<!-- Third search group on the right side, switch case: "3" -->
+	
+<!-- not used temporarily
+	<div id="3"> 
+	
+	<span class="txt-center" th:text="#{search.for.title}">search for in database</span>
+	<span class="txt-center" th:text="#{search.for.title2}">search for in database</span>
+	  	
+		<form action="#" th:action="@{/contacts}" th:object="${fromView}" th:method="post">
+			<input type="hidden" name="selector" value="3"/>
+				<div class="form-group">	 
+					<input class="form-control" id="input-box-left" type="text" th:field="*{searchFor3}" th:placeholder="#{search.for.like}"/>
+				</div>	
+				<div class="form-group">
+			  	  <select id="input-box-right" class="form-control" th:field="*{findBy}">
+			      <option value="0" th:text="#{select.find.in}" ></option>
+			        <option th:field="*{findBy}" value="firstName">first name</option>
+			        <option th:field="*{findBy}" value="lastName">last name</option>
+			        <option th:field="*{findBy}" value="email">email</option>
+			        <option th:field="*{findBy}" value="phone">phone</option>
+			        <option th:field="*{findBy}" value="street">street</option>
+			        <option th:field="*{findBy}" value="postcode">postcode</option>
+			        <option th:field="*{findBy}" value="city">city</option>
+			        <option th:field="*{findBy}" value="country">country</option>
+			      </select>
+			    </div>
+			    
+			    <span id="txt-left" th:text="#{limit}">limit to</span>
+			    <div class="form-group">
+				    <input class="form-control" type="number" id="dropdown-number-solo" th:field="*{result3}" />
+				</div>
+							
+			<button type="submit" class="btn btn-sm btn-block" id="load-btn-small" th:text="#{find.btn}">Load</button>
+			</form>
+	</div>	
+ -->	
+ 	
+	
+	
+	<div id="2"> <!-- Second search group on the right side, switch case: "2" -->
+		
+	  	<span class="txt-center" th:text="#{search.for.title}">search for in database</span>
+	  	<span class="txt-center" th:text="#{search.for.title2}">search for in database</span>
+	  	
+		<form action="#" th:action="@{/contacts}" th:object="${fromView}" th:method="post">
+			<input type="hidden" name="selector" value="2"/>
+				<div class="form-group">	 
+					<input class="form-control" id="input-box-left" type="text" th:field="*{searchFor2}" th:placeholder="#{search.for}"/>
+				</div>	
+				<div class="form-group">
+			  	  <select id="input-box-right" class="form-control" th:field="*{findBy}">
+			      <option value="0" th:text="#{select.find.in}" ></option>
+			        <option th:field="*{findBy}" value="firstName">first name</option>
+			        <option th:field="*{findBy}" value="lastName">last name</option>
+			        <option th:field="*{findBy}" value="email">email</option>
+			        <option th:field="*{findBy}" value="phone">phone</option>
+			        <option th:field="*{findBy}" value="street">street</option>
+			        <option th:field="*{findBy}" value="postcode">postcode</option>
+			        <option th:field="*{findBy}" value="city">city</option>
+			        <option th:field="*{findBy}" value="country">country</option>
+			      </select>
+			    </div>
+			    
+			    <span id="txt-left" th:text="#{limit}">limit to</span>
+			    <div class="form-group">
+				    <input class="form-control" type="number" id="dropdown-number-solo" th:field="*{result2}" />
+				</div>
+			<!-- 	<p id="txt-left" th:text="#{limit2}">contacts</p>	 -->
+				<button type="submit" class="btn btn-sm btn-block" id="load-btn-small" th:text="#{find.btn}">Load</button>
+			</form>
+	</div>
+	<br /><br />	
+	
+		
+	<div id="1"> <!-- First search group on the right side, switch case: "1" -->
+		<span class="txt-center" th:text="#{load}">Load</span>
+		<span class="txt-center" th:text="#{load2}">Load</span>
+		
+		<form action="#" th:action="@{/contacts}" th:object="${fromView}" th:method="post">
+			<input type="hidden" name="selector" value="1"/>
+			
+			  	<div class="form-group">
+			      <select id="input-box-left" class="form-control" th:field="*{sortBy}">
+			      <option value="0" th:text="#{select.sort.by}" ></option>
+			        <option th:field="*{sortBy}" value="firstName">first name</option>
+			        <option th:field="*{sortBy}" value="lastName">last name</option>
+			        <option th:field="*{sortBy}" value="email">email</option>
+			        <option th:field="*{sortBy}" value="phone">phone</option>
+			        <option th:field="*{sortBy}" value="street">street</option>
+			        <option th:field="*{sortBy}" value="postcode">postcode</option>
+			        <option th:field="*{sortBy}" value="city">city</option>
+			        <option th:field="*{sortBy}" value="country">country</option>
+			      </select>
+			    </div>			 
+			 	 <div class="form-group">
+			      <select id="input-box-right" class="form-control" th:field="*{direction}">
+			        <option th:field="*{direction}" value="1">ascending</option>
+			        <option th:field="*{direction}" value="-1">descending</option>
+			      </select>
+			     </div>	
+			    <span id="txt-left" th:text="#{limit}">limit to</span>	
+			    <div class="form-group">	
+					<input class="form-control" id="dropdown-number-solo" type="number" th:field="*{result1}" />		
+				</div>
+				<button type="submit" class="btn btn-sm btn-block" id="load-btn-small-last" th:text="#{load.btn}">Load</button>
+							
+	<!-- 	not used anymore
+			<span th:text="#{sort}">Sorted</span>
+			<br />
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="firstName"/>first name</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="lastName"/>last name</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="email"/>email</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="phone"/>phone</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="street"/>street</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="postcode"/>postcode</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="city"/>city</label>
+			<label class="radio-inline"><input type="radio" th:field="*{sortBy}" value="country"/>country</label>
+			
+			<label class="radio-inline"><input type="radio" th:field="*{direction}" value="1"/>ascending</label>
+			<label class="radio-inline"><input type="radio" th:field="*{direction}" value="-1"/>descending</label>	    
+
+			<button type="submit" class="btn" th:text="#{load.btn}">Load</button>
+	 -->
+		</form>
+	</div>
+	
+	
+	
+</div>
+
+<script type="text/javascript" th:src="@{js/bootstrap-datetimepicker.js}" charset="UTF-8"></script>
+<script type="text/javascript" th:src="@{js/bootstrap-datetimepicker.pl.js}" charset="UTF-8"></script>
+<script type="text/javascript">
+
+    $('.form_datetime').datetimepicker({
+        //language:  'pl',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1,
+        
+    });
+		
+</script>	
+
+
+		 
+</body>
+</html>

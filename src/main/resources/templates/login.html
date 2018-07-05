@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+	<script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+
+
+<div class="bgimg">
+	
+	<div class="lang"> 
+		<a th:href="@{/index?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
+		<a th:href="@{/index?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
+	</div>	
+	
+	<div class="container-login">
+	   <h3 id="header" th:text="#{login}">Login</h3>
+	   
+	   <span id="email-sent" th:if="${reset != null}" th:text="#{reset-ok}">Pswd reset ok</span>
+	   
+	   <span id="error-message" style="color:red !important" 
+	   			th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null and session[SPRING_SECURITY_LAST_EXCEPTION].message != null}" 
+	   			th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">Login failed</span>
+	   <form action="#" th:action="@{/login}" method="post">
+		    <span th:text="#{email}"><b>Email</b></span>
+		    <input type="text" th:placeholder="#{enter.email}" th:name="username"/>
+		
+		    <span th:text="#{password}"><b>Password</b></span>
+		    <input type="password" th:placeholder="#{enter.password}" name="password"/>
+		
+		    <button type="submit" th:text="#{login}">Login</button>
+		    <span>
+		    <input id="remember-me" type="checkbox" th:name="remember-me" />
+		    <span th:text="#{remember.me}"> remember.me</span>
+		    </span><br />
+		    <span class="forgot">
+		    <a th:href="@{/index}" th:text="#{back.to.home}" style="color:#3377ff; font-size: 14px; padding:0px 20px 0px 0px" >Homepage</a>
+		    <a th:href="@{/register}" th:text="#{not.registered}" style="color:#3377ff; font-size: 14px; padding:0px 20px 0px 0px" >Register</a>
+		    <a th:href="@{/forgot}" th:text="#{forgot.password}" style="color:#3377ff; font-size: 14px;" >Forgot password?</a>
+		    </span> 
+		</form> 
+	 </div>
+	
+</div>
+ 
+</body>
+</html>
+  

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+	<script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+
+
+<div class="bgimg">
+	
+	<div class="lang"> 
+		<a th:href="@{/?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
+		<a th:href="@{/?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
+		<a th:href="@{/?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
+		<a th:href="@{/?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
+	</div>	
+	
+	<div class="container-login">
+	   <h3 id="header" th:text="#{password.reset}">Pswd Reset</h3>
+	   
+	   <form action="#" th:action="@{/forgot}" method="post" th:object="${fromView}">
+	   
+	   		<span id="wrong-email" th:if="${incorrect != null}" th:text="#{email.not.found}">email.not.found</span>
+	   		<span id="wrong-email" th:if="${emailerror != null}" th:text="#{email.error}">Email error/failed</span>
+	   		<span id="email-sent" th:if="${reset != null}" th:text="#{reset.link.sent}">reset.link.sent</span>
+	   		
+		    <span th:if="${reset = null}" th:text="#{enter.email.registered}"><b>Email</b></span>
+		    <a th:if="${reset != null}" th:text="#{back.to.home}" th:href="@{/}">Back home</a>
+		    <input type="text" th:placeholder="#{enter.email}" th:field="*{text}"/>
+		
+		    <button type="submit" id="button-centre" th:text="#{reset}">Login</button>
+		        
+		</form> 
+	</div>
+	
+</div>
+ 
+</body>
+</html>
+  

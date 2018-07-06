@@ -179,6 +179,7 @@ public class ContactService {
 		Pageable pageable = new PageRequest(0, number, sort);
 		Page<Contact> contactsPage = contactRepository.findAllByUserId(user.getId(), pageable);
 		List<Contact> contacts = contactsPage.getContent();
+		logger.info("case 1: " + contacts.size());
 		return contacts;
 	}
 	
@@ -345,7 +346,7 @@ public class ContactService {
 								contactsByCreatedAndDescriptionName)
 						  .flatMap(Collection::stream);
 				List<Contact> resultAllColumnsCreated = resultAllColumnsCreatedStream.distinct().collect(Collectors.toList());
-				logger.info("stream after limit/number: " + resultAllColumnsCreated.size());
+				logger.info("stream created before removing duplicates:  " +  resultAllColumnsCreated.size());
 				
 				List<Contact> contactsByUpdatedAndFirstName = contactRepository.findByUserIdAndUpdatedBetweenAndFirstNameIgnoreCaseContaining(user.getId(), dateStartZoned, dateEndZoned, searched);
 				List<Contact> contactsByUpdatedAndLastName =  contactRepository.findByUserIdAndUpdatedBetweenAndLastNameIgnoreCaseContaining(user.getId(), dateStartZoned, dateEndZoned, searched);
@@ -364,16 +365,16 @@ public class ContactService {
 								contactsByUpdatedAndDescriptionName)
 						  .flatMap(Collection::stream);
 				List<Contact> resultAllColumnsUpdated = resultAllColumnsUpdatedStream.distinct().collect(Collectors.toList());
-				logger.info("stream after limit/number: " + resultAllColumnsUpdated.size());
+				logger.info("stream updated before removing duplicates:  " + resultAllColumnsUpdated.size());
 				
 				List<Contact> resultAllColumnsFiltered = Stream.of(resultAllColumnsCreated, resultAllColumnsUpdated)
 						.flatMap(Collection::stream)
-						.sorted(Comparator.comparing(Contact::getCreated).reversed())
+//						.sorted(Comparator.comparing(Contact::getCreated).reversed())
 						.distinct()
 						.limit(number)
 						.collect(Collectors.toList());
 				
-				
+				logger.info("stream after removing duplicates: " + resultAllColumnsFiltered.size());
 /*				Stream<Contact> resultAllColumnStream = Stream.of(resultAllColumnsCreated, resultAllColumnsUpdated)
 						.flatMap(Collection::stream);
 				List<Contact> resultAllColumnsFilteredCreated = resultAllColumnStream

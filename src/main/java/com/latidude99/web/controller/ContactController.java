@@ -142,9 +142,12 @@ public class ContactController {
 				break;
 			case "2":
 				resultContactsBeforeFlagsRemoved = 
-				contactService.findByPropertyName(currentUser, fromView.getFindBy(), fromView.getSearchFor2().trim(), fromView.getResult2());
-				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName() + ", limit: " + fromView.getResult2()
-						+ ", column: " + fromView.getFindBy() + ", search for2: " + fromView.getSearchFor2() + ", size: " + resultContactsBeforeFlagsRemoved.size());
+				contactService.findByPropertyName(currentUser, fromView.getFindBy(), 
+						fromView.getSearchFor2().trim(), fromView.getResult2());
+				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName() + ", limit: "
+						+ fromView.getResult2() + ", column: " + fromView.getFindBy() 
+						+ ", search for2: " + fromView.getSearchFor2() + ", size: "
+						+ resultContactsBeforeFlagsRemoved.size());
 				if(resultContactsBeforeFlagsRemoved.size() < 1) {
 					model.addAttribute("noContacts", "yes");
 				}else {
@@ -153,9 +156,12 @@ public class ContactController {
 				break;
 			case "3":
 				resultContactsBeforeFlagsRemoved = 
-				contactService.findByPartialPropertyName(currentUser, fromView.getFindBy(), fromView.getSearchFor3().trim(), fromView.getResult3());
-				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName() + ", limit: " + fromView.getResult3()
-						+ ", column: " + fromView.getFindBy() + ", search for3: " + fromView.getSearchFor3() + ", size: " + resultContactsBeforeFlagsRemoved.size());
+				contactService.findByPartialPropertyName(currentUser, fromView.getFindBy(),
+						fromView.getSearchFor3().trim(), fromView.getResult3());
+				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName()	+ ", limit: " 
+						+ fromView.getResult3() + ", column: " + fromView.getFindBy() + ", search for3: "
+						+ fromView.getSearchFor3() + ", size: " 
+				+ resultContactsBeforeFlagsRemoved.size());
 				if(resultContactsBeforeFlagsRemoved.size() < 1) {
 					model.addAttribute("noContacts", "yes");
 				}else {
@@ -164,11 +170,12 @@ public class ContactController {
 				break;
 			case "4":
 				resultContactsBeforeFlagsRemoved = 
-				contactService.findByDate(currentUser, fromView.getFindBy(), fromView.getSearchFor4().trim(), fromView.getResult4(),
-						fromView.getDateStartTxt(), fromView.getDateEndTxt());
-				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName() + ", limit: " + fromView.getResult4()
-						+ ", column: " + fromView.getFindBy() + ", search for4: " + fromView.getSearchFor4() +
-						", date start: " + fromView.getDateStartTxt() + ", date end: " + fromView.getDateEndTxt());
+				contactService.findByDate(currentUser, fromView.getFindBy(), fromView.getSearchFor4().trim(),
+						fromView.getResult4(), fromView.getDateStartTxt(), fromView.getDateEndTxt());
+				System.err.println(fromView.getSelector() + ", user: " + currentUser.getFirstName() + ", limit: " 
+						+ fromView.getResult4()	+ ", column: " + fromView.getFindBy() + ", search for4: " 
+						+ fromView.getSearchFor4() + ", date start: " + fromView.getDateStartTxt() + ", date end: "
+						+ fromView.getDateEndTxt());
 				if(resultContactsBeforeFlagsRemoved.size() < 1) {
 					model.addAttribute("noContacts", "yes");
 				}else {
@@ -186,7 +193,8 @@ public class ContactController {
 			logger.info("/contacts - resultContactsBeforeFlagsRemoved: "
 					+ resultContactsBeforeFlagsRemoved.size() + resultContactsBeforeFlagsRemoved.toString());
 			List<Contact> resultContacts = resultContactsBeforeFlagsRemoved.stream()
-					.filter(c -> (!"1".equals(c.getDeleted()) || !"1".equals(c.getDuplicated())))
+					.filter(c -> !"1".equals(c.getDeleted()))
+					.filter(c -> !"1".equals(c.getDuplicated()))
 					.collect(Collectors.toList());
 			logger.info("/contacts - resultContacts: " + resultContacts.size() + resultContacts.toString());
 			if(resultContacts.size() > 0) {

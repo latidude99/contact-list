@@ -26,7 +26,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void doSomethingAfterStartup() {
-		userService.addAdminRole(); 
+		userService.addAdminRole(); //("latidude99test@gmail.com"); 
 		userService.addDemoUserRole("Demo");
 		userService.addDemoUserRole("Test");
 	}

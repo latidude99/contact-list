@@ -35,7 +35,7 @@ search functionality.
 # Technologies
 - Java JDK 1.8
 - Maven 3.60
-- Spring Boot 1.5 with Spring Security 4, Spring Validation and Spring Data
+- Spring Boot 1.5.12 with Spring Security 4, Spring Validation and Spring Data
 - Thymeleaf 2 with Thymeleaf Extras
 - Google Maps iFrame
 - Hibernate

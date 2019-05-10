@@ -68,7 +68,14 @@
 
 .pace .pace-activity {
   border-radius: 50%;
-  border: 5px solid `args.color || "#29d"`;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-right-width: 5px;
+  border-right-style: solid;
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
   content: ' ';
   display: block;
   position: absolute;
@@ -80,7 +87,14 @@
 
 .pace .pace-activity:after {
   border-radius: 50%;
-  border: 5px solid `args.color || "#29d"`;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-right-width: 5px;
+  border-right-style: solid;
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
   content: ' ';
   display: block;
   position: absolute;
@@ -97,7 +111,14 @@
 
 .pace .pace-activity:before {
   border-radius: 50%;
-  border: 5px solid `args.color || "#29d"`;
+  border-top-width: 5px;
+  border-top-style: solid;
+  border-right-width: 5px;
+  border-right-style: solid;
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
   content: ' ';
   display: block;
   position: absolute;

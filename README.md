@@ -1,6 +1,6 @@
 # Contact List
 
-[![](https://img.shields.io/badge/release-2.3-blue.svg)](https://github.com/latidude99/contact-list/tree/master/release)
+[![](https://img.shields.io/badge/release-0.9-blue.svg)](https://github.com/latidude99/contact-list/tree/master/release)
 [![License: GPL v3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub issues](https://img.shields.io/badge/issues-open%200-greenred.svg)](https://GitHub.com/latidude99/contact-list/issues/)
 [![Maintenance](https://img.shields.io/badge/maintained-no-green.svg)](https://GitHub.com/latidude99/contact-list/graphs/commit-activity)

@@ -7,7 +7,7 @@
 [![](https://img.shields.io/badge/%20$%20-buy%20me%20a%20coffe-yellow.svg)](https://www.buymeacoffee.com/zWn1I6bVf)
 
 
-A simple addres book in English, Spanish, Russian and Polish.
+A simple address book in English, Polish, Spanish and Russian.
 
 
 ## Table of contents
@@ -67,7 +67,7 @@ Clone the repository to a folder on your computer and import it in your favourit
 
 ### Registration
 
-- two step registration proces
+Two step registration proces
   - registration form with an email address as username and a password with minimum of 6 characters 
     (with a unique username validation check against the database)
   - an email with a confirmation link, user account created on confirmation
@@ -101,7 +101,7 @@ You can:
 
 Entries in the database are not deleted when you click on 'Delete' contacts or 'Remove' duplicates buttons, they are only flagged as deleted and sit safely in the database. If you select another group of contacts or duplicates and clicks on the Delete button the flagged contacts are permanently removed from the database and the new group of contacts gets flagged. If you want to restore last deleted entries or removed duplicates, the flags are simply removed and contacts are again visible to you. This buffered approach applies only to batch operations, not individually deleted records directly in the contacts table.
 
-If you delete contacts insividually there is no 'undo' option. However, the deleting process has two stages so you can see the contact's details before comitting it to be removed prmanently.
+If you delete contacts individually there is no 'undo' option. However, the delete process has two stages so you can see the contact's details before comitting it to be removed prmanently.
 
 The application takes advantage of Spring Boot’s internationalization (i18n) capabilities and is available in four languages: English, Polish, Spanish and Russian.
 

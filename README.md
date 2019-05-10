@@ -30,10 +30,10 @@ search functionality.
 # Screenshots
 <p align="center">
   <img src="images/contacts_00.jpg" width=100%>
-	<img src="images/contacts_01.jpg" width=100%>
-	<img src="images/contacts_02.jpg" width=100%>
-	<img src="images/contacts_03.jpg" width=100%>
-	<img src="images/contacts_04.jpg" width=100%>
+  <img src="images/contacts_01.jpg" width=100%>
+  <img src="images/contacts_02.jpg" width=100%>
+  <img src="images/contacts_03.jpg" width=100%>
+  <img src="images/contacts_04.jpg" width=100%>
   <img src="images/contacts_05.jpg" width=100%>
   <img src="images/contacts_06.jpg" width=100%>
   <img src="images/contacts_07.jpg" width=100%>
@@ -54,14 +54,16 @@ search functionality.
 # Technologies
 - Java JDK 1.8
 - Maven 3.60
-- Apache Tomcat 8.0
 - Sprin Boot 1.5 with Spring Security 4, Spring Validation and Spring Data
-- Hibernate ver.
 - Thymeleaf 2 with Thymeleaf Extras
-- Eclipse / STS 3.9 , unit tests in IntelliJ IDEA. 
 - Google Maps iFrame
+- Hibernate
+- MySQL
+- Apache Tomcat 8.0
+- VPS with Debian 8
 - JUnit5 5.4.1
 - AssertJ 3.12.2
+- Eclipse / STS 3.9 , unit tests in IntelliJ IDEA. 
 
 **Plugins and libraries**
 - Maven Compiler plugin 3.8.0

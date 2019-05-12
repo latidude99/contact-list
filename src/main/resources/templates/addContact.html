@@ -1,117 +1,133 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta charset="UTF-8"></meta>
-  <link rel="stylesheet" type="text/css" th:href="@{css/contacts.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-  <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
-  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" type="text/css" th:href="@{css/contacts.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 <div>
-	<ul class="topnav">
-			<li><a id="title" href="/contacts" th:text="#{app.title}">Contacts</a></li>
-			<li><span id="topinfo-first" th:text="#{today.is}">Today is </span></li>
-			<li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentZonedDateTime)}">Thursday</span></li>
-			<li><span id="lastloggeddate" th:text="${#temporals.format(currentZonedDateTime, 'dd.MM.yyyy')}">25.05.2018</span></li>
-			<li><span id="lastloggeddate" th:text="${#temporals.format(currentZonedDateTime, 'HH:mm')}">Thursday</span></li>
-			<li><span id="topinfo-zone" th:text="#{zone}">Zone</span></li>
-			<li><span id="lastloggeddate" th:text="${currentZone}">London</span></li>
-			<li class="right">
-			    <form action="logout" th:action="@{/logout}" method="post" >
-			        <input type="submit" id="logmeout" th:value="#{logmeout}" />
-			    </form>
-			</li>						
-			<li class="right"><a id="flags" href="/contacts?lang=ru"><img src="/images/flag_ru128px.png" class="langimg"></img></a></li>
-			<li class="right"><a id="flags" href="/contacts?lang=es"><img src="/images/flag_es128px.png" class="langimg"></img></a></li>
-			<li class="right"><a id="flags" href="/contacts?lang=pl"><img src="/images/flag_pl128px.png" class="langimg"></img></a></li>
-			<li class="right"><a id="flags" href="/contacts?lang=en"><img src="/images/flag_uk128px.png" class="langimg"></img></a></li>
-	</ul>
+    <ul class="topnav">
+        <li><a id="title" href="/contacts" th:text="#{app.title}">Contacts</a></li>
+        <li><span id="topinfo-first" th:text="#{today.is}">Today is </span></li>
+        <li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentZonedDateTime)}">Thursday</span></li>
+        <li><span id="lastloggeddate"
+                  th:text="${#temporals.format(currentZonedDateTime, 'dd.MM.yyyy')}">25.05.2018</span></li>
+        <li><span id="lastloggeddate" th:text="${#temporals.format(currentZonedDateTime, 'HH:mm')}">Thursday</span></li>
+        <li><span id="topinfo-zone" th:text="#{zone}">Zone</span></li>
+        <li><span id="lastloggeddate" th:text="${currentZone}">London</span></li>
+        <li class="right">
+            <form action="logout" th:action="@{/logout}" method="post">
+                <input type="submit" id="logmeout" th:value="#{logmeout}"/>
+            </form>
+        </li>
+        <li class="right"><a id="flags" href="/contacts?lang=ru"><img src="/images/flag_ru128px.png"
+                                                                      class="langimg"></img></a></li>
+        <li class="right"><a id="flags" href="/contacts?lang=es"><img src="/images/flag_es128px.png"
+                                                                      class="langimg"></img></a></li>
+        <li class="right"><a id="flags" href="/contacts?lang=pl"><img src="/images/flag_pl128px.png"
+                                                                      class="langimg"></img></a></li>
+        <li class="right"><a id="flags" href="/contacts?lang=en"><img src="/images/flag_uk128px.png"
+                                                                      class="langimg"></img></a></li>
+    </ul>
 </div>
 <div>
-	<ul class="topinfo">
-			<li><span id="loggedinastext" th:text="#{loggedinas}">You are logged in as: </span></li>
-			<li><span id="loggedinasemail" th:text="${currentUser.email}">demo@demo.com</span></li>
-			<li><span id="loggedinastext" th:text="#{privileges}">privileges</span></li>
-			<li>
-			<div sec:authorize="hasRole('ROLE_USER')">
-				<span id="loggedinasemail" th:text="#{role.user}">-user-</span>
-			</div>
-			<div sec:authorize="hasRole('ROLE_ADMIN')">
-				<span id="loggedinasemail" th:text="#{role.admin}">-admin-</span>
-			</div>
-			</li>
-			<li><span id="lastloggedtext" th:text="#{account.created}">account created</span></li>
-			<li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentUser.registered)}">Thursday</span></li>
-			<li><span id="lastloggeddate" th:text="${#temporals.format(currentUser.registered, 'dd.MM.yyyy')}">25.05.2018</span></li>		
-			<li class="right"><span id="lastloggeddate" th:if="${currentUserContacts != null}" th:text="${contactsTotalByUser}">35</span></li>
-			<li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.total}">total</span></li>
-			<li class="right"><span id="lastloggeddate" th:if="${contactWrapper.resultList.size() != 0}" th:text="${contactWrapper.resultList.size()}">5</span></li>
-			<li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.loaded}">loaded</span></li>
-	</ul>
+    <ul class="topinfo">
+        <li><span id="loggedinastext" th:text="#{loggedinas}">You are logged in as: </span></li>
+        <li><span id="loggedinasemail" th:text="${currentUser.email}">demo@demo.com</span></li>
+        <li><span id="loggedinastext" th:text="#{privileges}">privileges</span></li>
+        <li>
+            <div sec:authorize="hasRole('ROLE_USER')">
+                <span id="loggedinasemail" th:text="#{role.user}">-user-</span>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <span id="loggedinasemail" th:text="#{role.admin}">-admin-</span>
+            </div>
+        </li>
+        <li><span id="lastloggedtext" th:text="#{account.created}">account created</span></li>
+        <li><span id="lastloggeddate" th:text="${#temporals.dayOfWeekName(currentUser.registered)}">Thursday</span></li>
+        <li><span id="lastloggeddate"
+                  th:text="${#temporals.format(currentUser.registered, 'dd.MM.yyyy')}">25.05.2018</span></li>
+        <li class="right"><span id="lastloggeddate" th:if="${currentUserContacts != null}"
+                                th:text="${contactsTotalByUser}">35</span></li>
+        <li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.total}">total</span></li>
+        <li class="right"><span id="lastloggeddate" th:if="${contactWrapper.resultList.size() != 0}"
+                                th:text="${contactWrapper.resultList.size()}">5</span></li>
+        <li class="right"><span id="lastloggedtext" th:text="#{number.of.contacts.loaded}">loaded</span></li>
+    </ul>
 </div>
 <div class="box-contacts">
-<div class="container" id="container-left">
-  <ul class="nav nav-tabs" id="tabs-head">
-    <li><a id="tab-link" th:href="@{/contacts}" th:text="#{contacts}">Contacts</a></li>
-    <li><a id="tab-link" data-toggle="tab" href="#add" th:text="#{add.contact}">Add Contact</a></li>
-    
-  </ul>
- <div class="container-list">
-  <div class="tab-content" >
-      
-    <div id="add" class="tab-pane fade in active">
-    
-     <form action="#" th:action="@{/addContact}" method="post" th:object="${contact}">
+    <div class="container" id="container-left">
+        <ul class="nav nav-tabs" id="tabs-head">
+            <li><a id="tab-link" th:href="@{/contacts}" th:text="#{contacts}">Contacts</a></li>
+            <li><a id="tab-link" data-toggle="tab" href="#add" th:text="#{add.contact}">Add Contact</a></li>
 
-        <p class="in-block" th:text="#{first.name.add}">First Name</p>
-		<input class="input-block" type="text" th:field="*{firstName}"></input>
-		<p class="error-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name errors</p><br/>
-		
-		<p class="in-block" th:text="#{last.name.add}">Last Name</p>
-		<input class="input-block" type="text" th:field="*{lastName}"></input>
-		<p class="error-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First name errors</p><br/>
-		
-		<p class="in-block" th:text="#{contact.phone}">Phone:</p>
-		<input class="input-block" type="text" th:field="*{phone}"></input><br/>
-		
-		<p class="in-block" th:text="#{contact.email}">Email:</p>
-		<input class="input-block" type="text" th:field="*{email}"></input>
-		<p class="error-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First name errors</p><br/>
-				
-		<p class="in-block" th:text="#{contact.street}">Street</p>
-		<input class="input-block" type="text" th:field="*{street}"></input><br/>
-		
-		<p class="in-block" th:text="#{contact.postcode}">Postcode</p>
-		<input class="input-block" type="text" th:field="*{postcode}"></input><br/>
-		
-		<p class="in-block" th:text="#{contact.city}">City</p>
-		<input type="text" class="input-block" th:field="*{city}"></input><br/>
-		
-		<p class="in-block" th:text="#{contact.country}">Country</p>
-		<input class="input-block" type="text" th:field="*{country}"></input><br/>
-		
-		<!-- <label class="in-block" for="date" th:text="#{date}">Phone:</label>
-		<input class="input-block" type="text" th:field="*{date}"></input><br/> -->
-		
-		<p class="in-block" th:text="#{contact.description}">Description:</p>
-		<textarea  id="input-block" style="height: 150px; width: 400px; background-color: rgb(255, 255, 255, 0.6);" th:field="*{description}"></textarea>
-		
-		<button class="btn btn-default btn-block" id="add-btn" type="submit" th:text="#{contact.add}">- Add contact -</button>
-		
-	</form>
-	
+        </ul>
+        <div class="container-list">
+            <div class="tab-content">
+
+                <div id="add" class="tab-pane fade in active">
+
+                    <form action="#" th:action="@{/addContact}" method="post" th:object="${contact}">
+
+                        <p class="in-block" th:text="#{first.name.add}">First Name</p>
+                        <input class="input-block" type="text" th:field="*{firstName}"></input>
+                        <p class="error-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First
+                            name errors</p><br/>
+
+                        <p class="in-block" th:text="#{last.name.add}">Last Name</p>
+                        <input class="input-block" type="text" th:field="*{lastName}"></input>
+                        <p class="error-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First
+                            name errors</p><br/>
+
+                        <p class="in-block" th:text="#{contact.phone}">Phone:</p>
+                        <input class="input-block" type="text" th:field="*{phone}"></input><br/>
+
+                        <p class="in-block" th:text="#{contact.email}">Email:</p>
+                        <input class="input-block" type="text" th:field="*{email}"></input>
+                        <p class="error-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First name
+                            errors</p><br/>
+
+                        <p class="in-block" th:text="#{contact.street}">Street</p>
+                        <input class="input-block" type="text" th:field="*{street}"></input><br/>
+
+                        <p class="in-block" th:text="#{contact.postcode}">Postcode</p>
+                        <input class="input-block" type="text" th:field="*{postcode}"></input><br/>
+
+                        <p class="in-block" th:text="#{contact.city}">City</p>
+                        <input type="text" class="input-block" th:field="*{city}"></input><br/>
+
+                        <p class="in-block" th:text="#{contact.country}">Country</p>
+                        <input class="input-block" type="text" th:field="*{country}"></input><br/>
+
+                        <!-- <label class="in-block" for="date" th:text="#{date}">Phone:</label>
+                        <input class="input-block" type="text" th:field="*{date}"></input><br/> -->
+
+                        <p class="in-block" th:text="#{contact.description}">Description:</p>
+                        <!--suppress CssInvalidFunction -->
+                        <textarea id="input-block"
+                                  style="height: 150px; width: 400px; background-color: rgb(255, 255, 255, 0.6);"
+                                  th:field="*{description}"></textarea>
+
+                        <button class="btn btn-default btn-block" id="add-btn" type="submit" th:text="#{contact.add}">-
+                            Add contact -
+                        </button>
+
+                    </form>
+
+                </div>
+                <div id="admin" class="tab-pane fade">
+                    <h3>Admin Panel</h3>
+                    <p>.</p>
+                </div>
+            </div>
+        </div>
     </div>
-     <div id="admin" class="tab-pane fade">
-      <h3>Admin Panel</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-</div>  
-</div>
 </div>
 <div class="box-action">
 

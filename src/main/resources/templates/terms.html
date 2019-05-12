@@ -1,32 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
-	<meta charset="UTF-8"></meta>
-	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-	<script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
-	<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" type="text/css" th:href="@{css/login.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
 
 </head>
 <body>
 
 
 <div class="bgimg">
-	
-	<div class="lang"> 
-		<a th:href="@{/terms?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
-		<a th:href="@{/terms?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
-		<a th:href="@{/terms?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
-		<a th:href="@{/terms?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
-	</div>	
-	
-	<div id="container-terms">
-	  		 <h3 style="padding: 0 0 0 39%;" id="header" th:text="#{terms}">Terms</h3><br />
-	   		 <p style="padding: 0 0 0 15%; display: block; text-align: justify;" th:text="#{terms.text}">Terms and Conditions </p>
-			<a th:href="@{/}"><button class="btn" th:text="#{back.to.home}">Homepage</button></a>
-	</div>
- </div>
+
+    <div class="lang">
+        <a th:href="@{/terms?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
+        <a th:href="@{/terms?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
+        <a th:href="@{/terms?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
+        <a th:href="@{/terms?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
+    </div>
+
+    <div id="container-terms">
+        <h3 style="padding: 0 0 0 39%;" id="header" th:text="#{terms}">Terms</h3><br/>
+        <p style="padding: 0 0 0 15%; display: block; text-align: justify;" th:text="#{terms.text}">Terms and
+            Conditions </p>
+        <a th:href="@{/}">
+            <button class="btn" th:text="#{back.to.home}">Homepage</button>
+        </a>
+    </div>
+</div>
 </body>
 <!--
 /**Copyright (C) 2018  Piotr Czapik.

@@ -18,120 +18,130 @@
  *  or write to: latidude99@gmail.com
  */
 
-    	body, html {
-    		background-image: url(/images/background4.jpg);
-    		//background: linear-gradient(#333, grey);
-    		background-color: darkgrey;
-		    height: 100%;
-		    margin: 0;
-		    font-family: Lucida Grande, Helvetica , Geneva, Verdana, Arial, Helvetica, sans-serif;
-		}
-		.bgimg {
-       		
-		    height: 100%;
-		    background-position: center;
-		    background-size: cover;
-		    position: relative;
-		}
-    	#title {
-    		font-family: Lucida Grande, Helvetica, Geneva, Verdana, Arial, Helvetica, sans-serif;
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            color: beige;
-            text-shadow: 2px 2px 30px #333;
-            font-style: normal;
-            font-size: 50px;
-            text-align: center;
-        }
-        .login {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.5);
-            color: black;
-            -webkit-transition-duration: 0.4s; /* Safari */
-		    transition-duration: 0.2s;
-            font-size: 22px;
-            padding: 20px 47px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .signup {
-            position: absolute;
-            top: 62%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.5);
-            color: black;
-            -webkit-transition-duration: 0.4s; /* Safari */
-		    transition-duration: 0.2s;
-            font-size: 22px;
-            padding: 20px 40px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .login:hover {
-            background-color: #555555;
-            color: white;
-        }
-        .signup:hover{
-            background-color: #555555;
-            color: white;
-        }
-        .langimg {
-			width:44px;
-			height:44px;
-			border:0;
-		}
-		.lang {
-			position: absolute;
-		    top: 0;
-		    right: 16px;
-			float: right;
-			padding: 24px;
-			display: inline;
-		}
-		#demologin {
-		    font-family: Lucida Grande, Geneva, Verdana, Arial, Helvetica, sans-serif;
-			position: absolute;
-            top: 90%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            color: white;
-            font-style: normal;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-		}
-		#demouser{
-		    border: none;
-		    color: white;
-		    padding: 6px 12px;
-		    text-align: center;
-		    text-decoration: none;
-		    display: inline-block;
-		    font-size: 16px;
-		    margin: 4px 2px;
-		    -webkit-transition-duration: 0.4s; /* Safari */
-		    transition-duration: 0.2s;
-		    cursor: pointer;
-			background-color: rgba(255, 255, 255, 0.5);
-		    color: black;
-		    /*border: 0px solid #555555;*/
-		    border-radius: 6px;
-		}
-		#demouser:hover {
-		    background-color: #555555;
-		    color: white;
-		}
+body, html {
+    background-image: url(/images/background4.jpg);
+/ / background: linear-gradient(#333, grey);
+    background-color: darkgrey;
+    height: 100%;
+    margin: 0;
+    font-family: Lucida Grande, Helvetica, Geneva, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.bgimg {
+
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+#title {
+    font-family: Lucida Grande, Helvetica, Geneva, Verdana, Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: beige;
+    text-shadow: 2px 2px 30px #333;
+    font-style: normal;
+    font-size: 50px;
+    text-align: center;
+}
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.2s;
+    font-size: 22px;
+    padding: 20px 47px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.signup {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.2s;
+    font-size: 22px;
+    padding: 20px 40px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.login:hover {
+    background-color: #555555;
+    color: white;
+}
+
+.signup:hover {
+    background-color: #555555;
+    color: white;
+}
+
+.langimg {
+    width: 44px;
+    height: 44px;
+    border: 0;
+}
+
+.lang {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    float: right;
+    padding: 24px;
+    display: inline;
+}
+
+#demologin {
+    font-family: Lucida Grande, Geneva, Verdana, Arial, Helvetica, sans-serif;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: white;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#demouser {
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.2s;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    border-radius: 6px;
+}
+
+#demouser:hover {
+    background-color: #555555;
+    color: white;
+}

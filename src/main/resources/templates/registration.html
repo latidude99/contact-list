@@ -1,76 +1,82 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
-	<meta charset="UTF-8"></meta>
-	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<link rel="stylesheet" type="text/css" th:href="@{css/registration.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-	<script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
-	<script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" type="text/css" th:href="@{css/registration.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
 
-	
+
 </head>
 <body>
-	<div class="bgimg">
-	
-	<div class="lang"> 
-		<a th:href="@{/register?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
-		<a th:href="@{/register?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
-		<a th:href="@{/register?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
-		<a th:href="@{/register?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
-	</div>	
-	
-	<div id="container-register">
-		
-		<h3 id="header" th:text="#{signup}">Sign up</h3>
-		<span style="color:red; display:inline;" th:if="${emailerror != null}" th:text="#{email.error}">Email error/failed</span>
-	    <p th:text="#{signup.description}">Please fill in this form to create an account.</p>
-	    <form action="#" method="post" th:action="@{/register}" th:object="${user}">
-	    
-		    <label for="email" th:text="#{first.name}"><b>First Name</b></label>
-		    <span style="color:red !important" th:errors="*{firstName}">LastName errors</span>
-		    <input type="text" th:field="*{firstName}" th:placeholder="#{enter.first.name}" />
-		    
-		    <label for="email" th:text="#{last.name}"><b>Last Name</b></label>
-		    <span style="color:red !important" th:errors="*{lastName}">Last Name errors</span>
-		    <input type="text" th:field="*{lastName}" th:placeholder="#{enter.last.name}" />
-		    
-		    <label for="email" th:text="#{email}"><b>Email*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
-		    <span style="color:red !important" th:if="${notAvailable}" th:text="#{not.available}">Not Available</span>
-		    <span style="color:red !important" th:errors="*{email}">email errors</span>
-		    <input type="text" th:field="*{email}" th:placeholder="#{enter.email}" />
-		
-		    <label for="password" th:text="#{password}"><b>Password*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
-		    <span style="color:red !important" th:errors="*{password}">password errors</span>
-		    <input th:field="*{password}" type="password" th:placeholder="#{enter.password}" id="password"/>
-		
-		    <label for="password" th:text="#{password.repeat}"><b>Repeat Password*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
-		    <span style="color:red !important" th:errors="*{password}">password errors</span>
-		    <input type="password" th:placeholder="#{enter.password}" id="confirm_password"/>
-		    
-		    <p>
-		    <span style="font-size: 14px; text-decoration: none;" th:text="#{terms1}" th:remove="tag"> you agree to our</span>
-		    <a th:href="@{/terms}" style="color:#3377ff; display: inline-block; padding:0 0 0 10px; font-size: 14px; text-decoration: none;" 
-		    th:text="#{terms2}">Terms &amp; Conditions</a>
-		    </p>
-		    
-		    <button type="submit" class="registerbtn" th:text="#{register}">Sign up</button>
-		    
-		</form>
-	    
-	    <span><a style="font-size: 14px;  text-decoration: none;" th:href="@{/login}" th:text="#{already.have.account}">Already have an account?</a>
-	    <a th:href="@{/login}" 
-	    style="display: inline-block !important; color:#3377ff; font-size: 14px; text-decoration: none; padding: 0px 0px 0px 15px;" 
-	    th:text="#{login}">Log in</a>
+<div class="bgimg">
+
+    <div class="lang">
+        <a th:href="@{/register?lang=en}"><img src="/images/flag_uk128px.png" class="langimg"></img></a>
+        <a th:href="@{/register?lang=pl}"><img src="/images/flag_pl128px.png" class="langimg"></img></a>
+        <a th:href="@{/register?lang=es}"><img src="/images/flag_es128px.png" class="langimg"></img></a>
+        <a th:href="@{/register?lang=ru}"><img src="/images/flag_ru128px.png" class="langimg"></img></a>
+    </div>
+
+    <div id="container-register">
+
+        <h3 id="header" th:text="#{signup}">Sign up</h3>
+        <span style="color:red; display:inline;" th:if="${emailerror != null}" th:text="#{email.error}">Email error/failed</span>
+        <p th:text="#{signup.description}">Please fill in this form to create an account.</p>
+        <form action="#" method="post" th:action="@{/register}" th:object="${user}">
+
+            <!--suppress XmlInvalidId -->
+            <label for="first.name" th:text="#{first.name}"><b>First Name</b></label>
+            <span style="color:red !important" th:errors="*{firstName}">LastName errors</span>
+            <input type="text" th:field="*{firstName}" th:placeholder="#{enter.first.name}"/>
+
+            <!--suppress XmlInvalidId -->
+            <label for="last.name" th:text="#{last.name}"><b>Last Name</b></label>
+            <span style="color:red !important" th:errors="*{lastName}">Last Name errors</span>
+            <input type="text" th:field="*{lastName}" th:placeholder="#{enter.last.name}"/>
+
+            <!--suppress XmlInvalidId -->
+            <label for="email" th:text="#{email}"><b>Email*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
+            <span style="color:red !important" th:if="${notAvailable}" th:text="#{not.available}">Not Available</span>
+            <span style="color:red !important" th:errors="*{email}">email errors</span>
+            <input type="text" th:field="*{email}" th:placeholder="#{enter.email}"/>
+
+            <label for="password" th:text="#{password}"><b>Password*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
+            <span style="color:red !important" th:errors="*{password}">password errors</span>
+            <input th:field="*{password}" type="password" th:placeholder="#{enter.password}" id="password"/>
+
+            <label for="password" th:text="#{password.repeat}"><b>Repeat
+                Password*</b></label><span>&nbsp; &nbsp; &nbsp;</span>
+            <span style="color:red !important" th:errors="*{password}">password errors</span>
+            <input type="password" th:placeholder="#{enter.password}" id="confirm_password"/>
+
+            <p>
+                <span style="font-size: 14px; text-decoration: none;" th:text="#{terms1}" th:remove="tag"> you agree to our</span>
+                <a th:href="@{/terms}"
+                   style="color:#3377ff; display: inline-block; padding:0 0 0 10px; font-size: 14px; text-decoration: none;"
+                   th:text="#{terms2}">Terms &amp; Conditions</a>
+            </p>
+
+            <button type="submit" class="registerbtn" th:text="#{register}">Sign up</button>
+
+        </form>
+
+        <span><a style="font-size: 14px;  text-decoration: none;" th:href="@{/login}" th:text="#{already.have.account}">Already have an account?</a>
+	    <a th:href="@{/login}"
+           style="display: inline-block !important; color:#3377ff; font-size: 14px; text-decoration: none; padding: 0px 0px 0px 15px;"
+           th:text="#{login}">Log in</a>
 	    </span>
-	    <a th:href="@{/}" th:text="#{back.to.home}" style="float: right; color:#3377ff; font-size: 14px; text-decoration: none; padding:0px 15px 0px 0px" >Homepage</a>
-	    
-	  </div>
-	
-	
-	</div>
-	
-	<script type="text/javascript" th:src="@{js/login.js}"></script>
+        <a th:href="@{/}" th:text="#{back.to.home}"
+           style="float: right; color:#3377ff; font-size: 14px; text-decoration: none; padding:0px 15px 0px 0px">Homepage</a>
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript" th:src="@{js/login.js}"></script>
 </body>
 <!--
 /**Copyright (C) 2018  Piotr Czapik.

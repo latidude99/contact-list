@@ -1,52 +1,182 @@
 
-		body, html {
-			background-image: url(/images/background4.jpg); height: 100%; margin: 0;
-		    font-family: Lucida Grande, Helvetica , Geneva, Verdana, Arial, Helvetica, sans-serif;}
-		.bgimg {height: 100%; background-position: center; background-size: cover; position: relative;}
-		form {/*border: 3px solid #f1f1f1;	height: 800px;*/}
-		input[type=text], input[type=password] {width: 100%; padding: 12px 20px; margin: 8px 0; display: inline-block;
-		    border: 1px solid #ccc; box-sizing: border-box;}
-		button {background-color: #737373; //#00cc44; font-size: 20px !important; color: white !important;
-		    padding: 8px 20px;  margin: 20px 0 !important; border: none; cursor: pointer; width: 100%; opacity: 0.7;}
-		button:hover { opacity: 1;}
-		
-		.cancelbtn {width: auto; padding: 10px 18px; background-color: #f44336; position: absolute; bottom: 1px;}
-		.imgcontainer {text-align: center; margin: 24px 0 12px 0;}
-		img.avatar { width: 40%; border-radius: 50%;}
-		.container-login {margin: 0; position: absolute; top: 50%; left: 50%;  -ms-transform: translate(-50%, -50%);
-		    transform: translate(-50%, -50%); padding: 8px 16px 8px 16px; background-color: rgba(255, 255, 255, 0.3);
-			/*max-width: 500px; 	margin: auto;*/	}
-		
-		#header {margin-top: 0px !important;}
-		
-		.forgot {float: right; font-color: #4dd2ff;}
-		#remember-me {padding: 8px 20px; margin-left: 15px;}
-				
-		span.psw {float: right;  padding-top: 16px;}
-		/* Change styles for span and cancel button on extra small screens */
-		@media screen and (max-width: 300px) {
-		    span.psw {display: block; float: none;}
-		}
-		.langimg {width:44px; height:44px;border:0;}
-		.lang {position: absolute; top: 0; right: 16px;	float: right; padding: 24px; display: inline;}
-		
-		#button-centre {width: 700px;}
+body, html {
+    background-image: url(/images/background4.jpg);
+    height: 100%;
+    margin: 0;
+    font-family: Lucida Grande, Helvetica, Geneva, Verdana, Arial, Helvetica, sans-serif;
+}
 
-		#error-message {color: red !important; font-size:14px; }
-		
-		#wrong-email {color: #ff1e1e!important; font-size:16px; }
-		#email-sent {color: #808000!important; font-size:16px; }
-		
-		#container-terms {position: absolute; top: 30%; left: 10%; width:80%; border: 0px solid #c0c0c0; padding: 0px, 0px;  
-    	color: white !important; text-shadow: 2px 2px 30px #333; font-size: 20px}
-    	
-		#container-info-small {position: absolute; top: 35%; left: 35%; border: 0px solid #c0c0c0; padding: 0px, 0px;  
-    	color: white !important; text-shadow: 1px 1px 10px grey; font-size: 20px}
-    	
-    	#reigstration-terms {position: absolute; top: 65%; left: 20%; background-color: rgba(255, 255, 255, 0.5); color: black;
-         -webkit-transition-duration: 0.4s; /* Safari */  transition-duration: 0.2s; font-size: 18px;
-         padding: 10px 27px; border: none; cursor: pointer; border-radius: 5px; text-align: center;}
-		#reigstration-terms:hover {background-color: rgba(0, 0, 0, 0.6); color: white;}
+.bgimg {
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+form {
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #737373;
+/ / #00cc44;
+    font-size: 20px !important;
+    color: white !important;
+    padding: 8px 20px;
+    margin: 20px 0 !important;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.7;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    position: absolute;
+    bottom: 1px;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.container-login {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 8px 16px 8px 16px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#header {
+    margin-top: 0px !important;
+}
+
+.forgot {
+    float: right;
+    font-color: #4dd2ff;
+}
+
+#remember-me {
+    padding: 8px 20px;
+    margin-left: 15px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+}
+
+.langimg {
+    width: 44px;
+    height: 44px;
+    border: 0;
+}
+
+.lang {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    float: right;
+    padding: 24px;
+    display: inline;
+}
+
+#button-centre {
+    width: 700px;
+}
+
+#error-message {
+    color: red !important;
+    font-size: 14px;
+}
+
+#wrong-email {
+    color: #ff1e1e !important;
+    font-size: 16px;
+}
+
+#email-sent {
+    color: #808000 !important;
+    font-size: 16px;
+}
+
+/*noinspection ALL*/
+#container-terms {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    border: 0px solid #c0c0c0;
+    padding: 0px, 0px;
+    color: white !important;
+    text-shadow: 2px 2px 30px #333;
+    font-size: 20px
+}
+
+/*noinspection ALL*/
+#container-info-small {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    border: 0px solid #c0c0c0;
+    padding: 0px, 0px;
+    color: white !important;
+    text-shadow: 1px 1px 10px grey;
+    font-size: 20px
+}
+
+#reigstration-terms {
+    position: absolute;
+    top: 65%;
+    left: 20%;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.2s;
+    font-size: 18px;
+    padding: 10px 27px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#reigstration-terms:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
     
     
     

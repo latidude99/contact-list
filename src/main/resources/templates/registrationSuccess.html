@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta charset="UTF-8"/>
-  <link rel="stylesheet" type="text/css" th:href="@{css/contacts.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
-  <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
-  <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/contacts.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 
-	<ul class="topnav">
-			<li><a id="title" href="/contacts" th:text="#{app.title}">Contacts</a></li>
-		
-			<li class="right"><a href="/contacts?lang=ru"><img src="/images/flag_ru128px.png" class="langimg"></img></a></li>
-			<li class="right"><a href="/contacts?lang=es"><img src="/images/flag_es128px.png" class="langimg"></img></a></li>
-			<li class="right"><a href="/contacts?lang=pl"><img src="/images/flag_pl128px.png" class="langimg"></img></a></li>
-			<li class="right"><a href="/contacts?lang=en"><img src="/images/flag_uk128px.png" class="langimg"></img></a></li>
-	</ul>
+<ul class="topnav">
+    <li><a id="title" href="/contacts" th:text="#{app.title}">Contacts</a></li>
+
+    <li class="right"><a href="/contacts?lang=ru"><img src="/images/flag_ru128px.png" class="langimg"></img></a></li>
+    <li class="right"><a href="/contacts?lang=es"><img src="/images/flag_es128px.png" class="langimg"></img></a></li>
+    <li class="right"><a href="/contacts?lang=pl"><img src="/images/flag_pl128px.png" class="langimg"></img></a></li>
+    <li class="right"><a href="/contacts?lang=en"><img src="/images/flag_uk128px.png" class="langimg"></img></a></li>
+</ul>
 <div>
- 
-	<p id="container-info" th:text="#{registration.confirmation}">Email confirmed, you can log in now!</p>
-	
-   	<a th:href="@{/login}"><button class="btn" id="reigstration-success-login" th:text="#{login}">LogIn</button></a>
+
+    <p id="container-info" th:text="#{registration.confirmation}">Email confirmed, you can log in now!</p>
+
+    <a th:href="@{/login}">
+        <button class="btn" id="reigstration-success-login" th:text="#{login}">LogIn</button>
+    </a>
 </div>
 </body>
 <!--

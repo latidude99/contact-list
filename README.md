@@ -62,7 +62,7 @@ Run maven command: 'mvn clean package'. This should create an executable 'jar' w
 You should have MySQL empty database named 'contacts' up and running on your machine. The database should be availabe on the 3306 port - you can change the default settings in the 'application.properties' file.
 Then, after successful build process navigate to the 'target/' folder of the project and run 'java -jar contacts.jar' command. 
 The application should be availavle at localhost://8080 in your Internet browser.
-In windows instead of command line you should also be able to double click the 'contacts.jar' file although you will not get any information about start-up process and it's possible failure. You can check in Task Manager if process is running (JVM process).
+In windows instead of command line you should also be able to double click the 'contacts.jar' file although you will not get any information about start-up process and its possible failure. You can check in Task Manager if process is running (JVM process).
 
 # Features
 

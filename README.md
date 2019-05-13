@@ -45,8 +45,7 @@ search functionality.
 - Eclipse / STS 3.9 , switched to IntelliJ IDEA 
 
 **Plugins and libraries**
-- Maven Compiler plugin 3.8.0
-- Maven Site plugin version 3.6
+- Spring Boot Maven Plugin
 
 # Setup
 
@@ -57,7 +56,7 @@ Clone the repository to a folder on your computer and import it in your favourit
 Run maven command: 'mvn clean package'. This should create an executable 'jar' with all libraries needed included.
 
 # Launch
-Execute the executable 'jar' file. The application should be availavle at localhost://8080.
+Double click on the executable 'jar' file. The application should be availavle at localhost://8080 in your Internet browser.
 
 # Features
 

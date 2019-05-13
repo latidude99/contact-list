@@ -59,7 +59,8 @@ Clone the repository to a folder on your computer and import it in your favourit
 Run maven command: 'mvn clean package'. This should create an executable 'jar' with all libraries needed included.
 
 # Launch
-You should have MySQL empty database named 'contacts' up and running on your machine. The database should be availabe on the 3306 port - you can change the default settings in the 'application.properties' file.
+You should have MySQL empty database named 'contacts' up and running on your machine. The database should be availabe on the 3306 port although you can change the default settings in the 'application.properties' file.
+You also need to change XXX in the 'application.properties' file for your username/password to the database as well as email address username/password (including spring.mail.host property - for Gmail this would be smtp.gmail.com).
 Then, after successful build process navigate to the 'target/' folder of the project and run 'java -jar contacts.jar' command. 
 The application should be availavle at localhost://8080 in your Internet browser.
 In windows instead of command line you should also be able to double click the 'contacts.jar' file although you will not get any information about start-up process and its possible failure. You can check in Task Manager if process is running (JVM process).

@@ -37,6 +37,7 @@ search functionality.
 - Maven 3.60
 - Spring Boot 1.5.12 with Spring Security 4, Spring Validation and Spring Data
 - Thymeleaf 2 with Thymeleaf Extras for Spring Security and Java 8 Time API support
+- Bootstrap 3
 - Google Maps iFrame
 - Hibernate
 - MySQL

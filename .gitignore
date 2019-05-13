@@ -3,6 +3,7 @@
 ##########################
 _IGNORE/
 _IGNORE_contacts/
+application.properties
 
 ##########################
 ## Java

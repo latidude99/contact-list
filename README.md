@@ -23,9 +23,11 @@ A simple address book in English, Polish, Spanish and Russian.
 
 
 # General Info
-My first foray into web apps world. Written after finishing a Spring Framework course mainly to practise things learnt
+My first foray into web apps world. Written after finishing a Spring Framework course mainly to practise what I have learnt
 on the course. It is as the name suggests a list or database of contacts with user registration and criteria based 
 search functionality. 
+
+You can visit live demo at http://contacts.latidude99.com 
 
 <p align="center">
   <img src="images/contacts_15.jpg" width=100%>
@@ -57,7 +59,7 @@ Clone the repository to a folder on your computer and import it in your favourit
 Run maven command: 'mvn clean package'. This should create an executable 'jar' with all libraries needed included.
 
 # Launch
-You should have MySQL empty database named 'contacts' up and running on your machine. Then, after successfull build process navigate to the 'target/' folder of the projec and in command line run 'java -jar contacts.jar'. The application should be availavle at localhost://8080 in your Internet browser. In windows instead of command line you should also be able to double click the 'contacts.jar' file although you will not get any information about start-up process and it's possible failure. You can check in Task Manager if process is running (JVM process).
+You should have MySQL empty database named 'contacts' up and running on your machine. Then, after successful build process navigate to the 'target/' folder of the projec and in command line run 'java -jar contacts.jar'. The application should be availavle at localhost://8080 in your Internet browser. In windows instead of command line you should also be able to double click the 'contacts.jar' file although you will not get any information about start-up process and it's possible failure. You can check in Task Manager if process is running (JVM process).
 
 # Features
 
@@ -101,7 +103,7 @@ If you delete contacts individually there is no 'undo' option. However, the dele
 
 The application takes advantage of Spring Boot’s internationalization (i18n) capabilities and is available in four languages: English, Polish, Spanish and Russian.
 
-There are quite a few things I could and would like to improve on or add to this simple app but I had to draw a line somewhere and move on to the next project.
+There are quite a few things I could and would like to improve on or add to this application but I had to draw a line somewhere and move on to the next project.
 
 # Status
 Closed

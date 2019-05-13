@@ -36,32 +36,28 @@ search functionality.
 - Java JDK 1.8
 - Maven 3.60
 - Spring Boot 1.5.12 with Spring Security 4, Spring Validation and Spring Data
-- Thymeleaf 2 with Thymeleaf Extras
+- Thymeleaf 2 with Thymeleaf Extras and Java 8 Time API support
 - Google Maps iFrame
 - Hibernate
 - MySQL
 - Apache Tomcat 8.0
 - VPS with Debian 8
-- JUnit5 5.4.1
-- AssertJ 3.12.2
-- Eclipse / STS 3.9 , unit tests in IntelliJ IDEA. 
+- Eclipse / STS 3.9 , switched to IntelliJ IDEA 
 
 **Plugins and libraries**
 - Maven Compiler plugin 3.8.0
 - Maven Site plugin version 3.6
-- Maven Surefire plugin  version 2.22.0
-
 
 # Setup
 
-Clone the repository to a folder on your computer and import it in your favourite IDE as a Maven project.
+Clone the repository to a folder on your computer and import it in your favourite IDE as a Maven project. It uses Tomcat 8.0 as a web server.
 
 ### Build
 
-
+Run maven command: 'mvn clean package'. This should create an executable 'jar' with all libraries needed included.
 
 # Launch
-
+Execute the executable 'jar' file. The application should be availavle at localhost://8080.
 
 # Features
 

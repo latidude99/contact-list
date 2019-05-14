@@ -56,7 +56,7 @@ Clone the repository to a folder on your computer and import it in your favourit
 
 ### Build
 
-Run maven command: 'mvn clean package'. This should create an executable 'jar' with all libraries needed included.
+Run maven command: 'mvn clean package'. This should create an executable 'jar' with all the libraries needed, including Tomcat.
 
 # Launch
  - you should have MySQL empty database named 'contacts' up and running on your machine. The database should be availabe on the 3306 port although you can change the default settings in the 'application.properties' file

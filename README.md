@@ -93,7 +93,7 @@ You can:
 - use one of the following batch operations:
   - download and save to a CSV file all contacts
   - download and save to a CSV file selected contacts
-  - upload and save to the database contacts in CSV file
+  - upload and save to the database contacts from a CSV file
   - delete all contacts
   - delete selected contacts
   - restore last deleted contacts
@@ -101,9 +101,9 @@ You can:
   - remove duplicate entries
   - restore last removed duplicaes
 
-Entries in the database are not deleted when you click on 'Delete' contacts or 'Remove' duplicates buttons, they are only flagged as deleted and sit safely in the database. If you select another group of contacts or duplicates and clicks on the Delete button the flagged contacts are permanently removed from the database and the new group of contacts gets flagged. If you want to restore last deleted entries or removed duplicates, the flags are simply removed and contacts are again visible to you. This buffered approach applies only to batch operations, not individually deleted records directly in the contacts table.
+Entries in the database are not deleted when you click on 'Delete' contacts or 'Remove' duplicates buttons, they are only flagged as deleted and sit safely in the database. If you select another group of contacts or duplicates and clicks on the Delete button the flagged contacts are permanently removed from the database and the new group of contacts gets flagged. If you want to restore last deleted entries or removed duplicates, the flags are simply removed and contacts are visible again. This buffered approach applies only to batch operations, not individually deleted records directly in the contacts table.
 
-If you delete contacts individually there is no 'undo' option. However, the delete process has two stages so you can see the contact's details before comitting it to be removed prmanently.
+If you delete contacts individually there is no 'undo' option. However, the delete process has two stages so you can see the contact's details before comitting it to be removed permanently.
 
 The application takes advantage of Spring Boot’s internationalization (i18n) capabilities and is available in four languages: English, Polish, Spanish and Russian.
 

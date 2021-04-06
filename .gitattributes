@@ -1,5 +1,5 @@
   
-# to change language of repo to Python
+# to change language of repo to Java
     *.html linguist-language=Java
 
 
